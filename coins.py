@@ -35,7 +35,7 @@ print "\n\n\n\n"
 # INPUT STRING
 coin = raw_input("Name coin is : ")
 nb_coins_string =  raw_input("How many coins : ")
-question_btc_coin = raw_input("Have you got Bitcoin ? (yes or no) : ")
+question_btc_coin = raw_input("Do you still have bitcoins? (yes or no) : ")
 
 
 # SI VIDE
@@ -55,7 +55,7 @@ nb_coins = float(nb_coins_string)
 if question_btc_coin == "yes" :
 	
 	# SI IL RESTE DES BITCOINS, COMBIEN EN A T ON ?
-	question_btc_coin = raw_input("How many Bitcoin ? : ")
+	question_btc_coin = raw_input("How many bitcoins do you have left ? : ")
 	potentiel_buy = float(question_btc_coin)
 	
 	x = 1
