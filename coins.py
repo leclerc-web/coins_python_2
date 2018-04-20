@@ -98,36 +98,25 @@ if coin != "bitcoin" :
 
 
 			#------------------COURS BTC---------------------#
-
-			if coin != "bitcoin" :
 				
-				from terminaltables import AsciiTable
-				
-				if split_btc[0][0] == "-" :
-				
-					table_data = [
-						['1 BTC --> Euro','BTC %'],
-						[Color('{autored}'+ str(cours_btc) + '{/autored}'),
-						 Color('{autored}'+ str(btc_percent) + '{/autored}')]
-					]
-					table = AsciiTable(table_data)
-					print table.table
-					
-				else :
-				
-					table_data = [
-						['1 BTC --> Euro','BTC %'],
-						[Color('{autored}'+ str(cours_btc) + '{/autored}'),
-						 Color('{autogreen}'+ str(btc_percent) + '{/autogreen}')]
-					]
-					table = AsciiTable(table_data)
-					print table.table
-					
-			else : 
-				
+			from terminaltables import AsciiTable
+			
+			if split_btc[0][0] == "-" :
+			
 				table_data = [
-					['1 BTC --> Euro'],
-					[Color('{autored}'+ str(cours_btc) + '{/autored}')]
+					['1 BTC --> Euro','BTC %'],
+					[Color('{autored}'+ str(cours_btc) + '{/autored}'),
+					 Color('{autored}'+ str(btc_percent) + '{/autored}')]
+				]
+				table = AsciiTable(table_data)
+				print table.table
+				
+			else :
+			
+				table_data = [
+					['1 BTC --> Euro','BTC %'],
+					[Color('{autored}'+ str(cours_btc) + '{/autored}'),
+					 Color('{autogreen}'+ str(btc_percent) + '{/autogreen}')]
 				]
 				table = AsciiTable(table_data)
 				print table.table
@@ -227,36 +216,25 @@ if coin != "bitcoin" :
 			
 			
 			#------------------COURS BTC---------------------#
-							
-			if coin != "bitcoin" :
 			
-				from terminaltables import AsciiTable
-				
-				if split_btc[0][0] == "-" :
-				
-					table_data = [
-						['1 BTC --> Euro','BTC %'],
-						[Color('{autored}'+ str(cours_btc) + '{/autored}'),
-						 Color('{autored}'+ str(btc_percent) + '{/autored}')]
-					]
-					table = AsciiTable(table_data)
-					print table.table
-					
-				else :
-				
-					table_data = [
-						['1 BTC --> Euro','BTC %'],
-						[Color('{autored}'+ str(cours_btc) + '{/autored}'),
-						 Color('{autogreen}'+ str(btc_percent) + '{/autogreen}')]
-					]
-					table = AsciiTable(table_data)
-					print table.table
-					
-			else : 
-				
+			from terminaltables import AsciiTable
+			
+			if split_btc[0][0] == "-" :
+			
 				table_data = [
-					['1 BTC --> Euro'],
-					[Color('{autored}'+ str(cours_btc) + '{/autored}')]
+					['1 BTC --> Euro','BTC %'],
+					[Color('{autored}'+ str(cours_btc) + '{/autored}'),
+					 Color('{autored}'+ str(btc_percent) + '{/autored}')]
+				]
+				table = AsciiTable(table_data)
+				print table.table
+				
+			else :
+			
+				table_data = [
+					['1 BTC --> Euro','BTC %'],
+					[Color('{autored}'+ str(cours_btc) + '{/autored}'),
+					 Color('{autogreen}'+ str(btc_percent) + '{/autogreen}')]
 				]
 				table = AsciiTable(table_data)
 				print table.table
