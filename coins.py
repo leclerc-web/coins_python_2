@@ -393,3 +393,5 @@ elif coin == "bitcoin" :
 		time.sleep(5)
 		# CMD CLEAR
 		os.system('cls' if os.name == 'nt' else 'clear')
+		
+		
