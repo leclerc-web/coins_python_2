@@ -131,8 +131,6 @@ if question_btc_coin == "yes" :
 		
 		#-----------------SOMME TOTAL--------------------#
 		
-		# SI "-" EXISTE, POURENTAGE AFFICHE EN ROUGE
-		
 		from terminaltables import AsciiTable
 		
 		if split_coins[0][0] == "-" :
