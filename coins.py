@@ -6,23 +6,24 @@
 # INSTALL WINDOWS python -m ...
 
 
-# FONCTION SLEEP
+# SLEEP
 import time
-# IMPORT VARIABLE OS CLEAR
+# VARIABLE OS
 import os
 # API
 import json
 import urllib2
-# COULEUR TABLEAU
+# COULEUR 
 from colorclass import Color
-
+# TABLEAU
+from terminaltables import AsciiTable
 
 ####################################################################################
 
 api_name = "https://api.coinmarketcap.com/v1/ticker/"
 name_json = json.load(urllib2.urlopen(api_name))
 
-# CREATION LISTE ID | SORTED() POUR TRIE ALPHABET
+# LISTE ID | SORTED() TRIE ALPHABET
 ids = sorted([name['id'] for name in name_json]) 
  
 for id in ids:
@@ -45,7 +46,7 @@ if not nb_coins_string :
 	print Color("{autored}Put your coins amount or put 0{/autored}")
 	print "\n\n"
 
-# CONVERSION STRING  INPUT EN FLOAT
+# CONVERSION STRING -> FLOAT
 nb_coins = float(nb_coins_string)
 ####################################################################################
 	
@@ -58,7 +59,7 @@ if coin != "bitcoin" :
 	if question_btc_coin == "yes" :
 	
 		##########################################################################################################
-		# SI IL RESTE DES BITCOINS, COMBIEN EN A T ON ?
+		# SI IL RESTE DES BITCOINS, COMBIEN ?
 		question_btc_coin = raw_input("How many bitcoins do you have left ? : ")
 		
 		# SI VIDE
@@ -84,23 +85,21 @@ if coin != "bitcoin" :
 			btc_json = json.load(urllib2.urlopen(api_btc))
 			
 
-			# VALEUR D'UN BITCOIN E EURO
+			# COURS DU BITCOIN EN EURO
 			cours_btc = float(btc_json[0]["price_eur"])
 
-
-			# VALEUR DE LA MONNAIE EN EURO, USD, BTC
+			# COURS DE LA MONNAIE EN EURO, USD, BTC
 			coin_euro = round(float(coin_json[0]["price_eur"]),2)
 			coin_usd  = round(float(coin_json[0]["price_usd"]),2)
 			coin_btc  = float(coin_json[0]["price_btc"])
 
-			# POURCENTAGE
+			# POURCENTAGE 24H
 			btc_percent = str(btc_json[0]["percent_change_24h"])
 			coin_percent = str(coin_json[0]["percent_change_24h"])
 			# EXPLODE DE LA CHAINE POUR RECUPERER "-"
 			split_coins = coin_percent.split('.')
 			split_btc = btc_percent.split('.')
-			
-			
+					
 			# SOMME DE COINS EN BITCOIN
 			total_coin_btc = float(nb_coins * coin_btc)
 			# PRODUIT EN X, TOTAL DE COIN EN BTC * PRIX DU BTC EN EURO / 1
@@ -108,11 +107,8 @@ if coin != "bitcoin" :
 
 
 
-
 			#------------------COURS BTC---------------------#
-				
-			from terminaltables import AsciiTable
-			
+						
 			if split_btc[0][0] == "-" :
 			
 				table_data = [
@@ -133,9 +129,8 @@ if coin != "bitcoin" :
 				table = AsciiTable(table_data)
 				print table.table
 				
-			#------------------POTENTIEL---------------------#
-			
-			from terminaltables import AsciiTable
+			#------------------POTENTIEL---------------------#		
+			 
 			table_data = [
 				[ 'Achat potentiel', 'Total potentiel'],
 				[Color('{autored}'+ str(potentiel_buy / coin_btc) + '{/autored}'),
@@ -144,9 +139,7 @@ if coin != "bitcoin" :
 			table = AsciiTable(table_data)
 			print table.table
 			
-			#-----------------SOMME TOTAL--------------------#
-			
-			from terminaltables import AsciiTable
+			#-----------------SOMME TOTAL--------------------#			 
 			
 			if split_coins[0][0] == "-" :
 		
@@ -173,8 +166,7 @@ if coin != "bitcoin" :
 				print table.table
 
 			#------------------COURS COINS---------------------#
-
-			from terminaltables import AsciiTable
+			 
 			table_data = [
 				['Cours '+ coin +' --> $', 'Cours ' + coin + ' --> EURO', 'Cours ' + coin +' --> SATOSHIS'],
 				[Color('{autored}' + str(coin_usd) + '{/autored}'), 
@@ -201,23 +193,20 @@ if coin != "bitcoin" :
 			api_btc  = "https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=EUR";
 			btc_json = json.load(urllib2.urlopen(api_btc))
 			
-
-			# VALEUR D'UN BITCOIN E EURO
+			# COURS D'UN BITCOIN EN EURO
 			cours_btc = float(btc_json[0]["price_eur"])
 
-
-			# VALEUR DE LA MONNAIE EN EURO, USD, BTC
+			# COURS MONNAIE : EURO, USD, BTC
 			coin_euro = round(float(coin_json[0]["price_eur"]),2)
 			coin_usd  = round(float(coin_json[0]["price_usd"]),2)
 			coin_btc  = float(coin_json[0]["price_btc"])
 
-			# POURCENTAGE
+			# POURCENTAGE 24H
 			btc_percent = str(btc_json[0]["percent_change_24h"])
 			coin_percent = str(coin_json[0]["percent_change_24h"])
 			# EXPLODE DE LA CHAINE POUR RECUPERER "-"
 			split_coins = coin_percent.split('.')
-			split_btc = btc_percent.split('.')
-			
+			split_btc = btc_percent.split('.')			
 			
 			# SOMME DE COINS EN BITCOIN
 			total_coin_btc = float(nb_coins * coin_btc)
@@ -228,9 +217,7 @@ if coin != "bitcoin" :
 			
 			
 			#------------------COURS BTC---------------------#
-			
-			from terminaltables import AsciiTable
-			
+				
 			if split_btc[0][0] == "-" :
 			
 				table_data = [
@@ -251,9 +238,7 @@ if coin != "bitcoin" :
 				table = AsciiTable(table_data)
 				print table.table
 
-			#-----------------SOMME TOTAL--------------------#
-			
-			from terminaltables import AsciiTable
+			#-----------------SOMME TOTAL--------------------#		 
 			
 			if split_coins[0][0] == "-" :
 			
@@ -268,8 +253,7 @@ if coin != "bitcoin" :
 				print table.table
 				
 			else : 
-			
-				from terminaltables import AsciiTable
+							 
 				table_data = [
 					['TOTAL ' + coin +'','TOTAL BTC', 'TOTAL euros', coin +' %'],
 					[Color('{autored}' + str(nb_coins) + '{/autored}'),
@@ -281,8 +265,7 @@ if coin != "bitcoin" :
 				print table.table
 
 			#------------------COURS COINS---------------------#
-
-			from terminaltables import AsciiTable
+			 
 			table_data = [
 				['Cours '+ coin +' --> $', 'Cours ' + coin + ' --> EURO', 'Cours ' + coin +' --> SATOSHIS'],
 				[Color('{autored}' + str(coin_usd) + '{/autored}'), 
@@ -313,22 +296,19 @@ elif coin == "bitcoin" :
 		api_btc  = "https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=EUR";
 		btc_json = json.load(urllib2.urlopen(api_btc))
 		
-
-		# VALEUR D'UN BITCOIN E EURO
+		# COURS BITCOIN EN EURO
 		cours_btc = float(btc_json[0]["price_eur"])
 
-
-		# VALEUR DE LA MONNAIE EN EURO, USD, BTC
+		# COURS MONNAIE : EURO, USD, BTC
 		coin_euro = round(float(coin_json[0]["price_eur"]),2)
 		coin_usd  = round(float(coin_json[0]["price_usd"]),2)
 		coin_btc  = float(coin_json[0]["price_btc"])
 
-		# POURCENTAGE
+		# POURCENTAGE 24H
 		coin_percent = str(coin_json[0]["percent_change_24h"])
 		# EXPLODE DE LA CHAINE POUR RECUPERER "-"
 		split_coins = coin_percent.split('.')
-		
-		
+			
 		# SOMME DE COINS EN BITCOIN
 		total_coin_btc = float(nb_coins * coin_btc)
 		# PRODUIT EN X, TOTAL DE COIN EN BTC * PRIX DU BTC EN EURO / 1
@@ -338,8 +318,7 @@ elif coin == "bitcoin" :
 
 
 		#------------------COURS BTC---------------------#
-		
-		from terminaltables import AsciiTable
+		 	 
 		# SUPPRESSION % 
 		table_data = [
 			['1 BTC --> Euro'],
@@ -347,11 +326,9 @@ elif coin == "bitcoin" :
 		]
 		table = AsciiTable(table_data)
 		print table.table
-
+	
 		#-----------------SOMME TOTAL--------------------#
-		
-		from terminaltables import AsciiTable
-
+			
 		if split_coins[0][0] == "-" :
 		
 			table_data = [
@@ -365,8 +342,7 @@ elif coin == "bitcoin" :
 			print table.table
 			
 		else : 
-		
-			from terminaltables import AsciiTable
+				 
 			table_data = [
 				['TOTAL ' + coin +'','TOTAL BTC', 'TOTAL euros', coin +' %'],
 				[Color('{autored}' + str(nb_coins) + '{/autored}'),
@@ -378,8 +354,7 @@ elif coin == "bitcoin" :
 			print table.table
 
 		#------------------COURS COINS---------------------#
-
-		from terminaltables import AsciiTable
+	 
 		table_data = [
 			['Cours '+ coin +' --> $', 'Cours ' + coin + ' --> EURO', 'Cours ' + coin +' --> SATOSHIS'],
 			[Color('{autored}' + str(coin_usd) + '{/autored}'), 
