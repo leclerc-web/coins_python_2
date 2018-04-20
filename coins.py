@@ -41,11 +41,11 @@ question_btc_coin = raw_input("Do you still have bitcoins? (yes or no) : ")
 # SI VIDE
 if not nb_coins_string :
 
- os.system('cls' if os.name == 'nt' else 'clear')
+	os.system('cls' if os.name == 'nt' else 'clear')
 
- print "\n\n"
- print Color("{autored}Put your coins amount or put 0{/autored}")
- print "\n\n"
+	print "\n\n"
+	print Color("{autored}Put your coins amount or put 0{/autored}")
+	print "\n\n"
 
  
 # CONVERSION STRING  INPUT EN FLOAT
@@ -57,9 +57,8 @@ if question_btc_coin == "yes" :
 	# SI IL RESTE DES BITCOINS, COMBIEN EN A T ON ?
 	question_btc_coin = raw_input("How many bitcoins do you have left ? : ")
 	potentiel_buy = float(question_btc_coin)
-	
-	x = 1
-	while x >= 0 :
+
+	while True :
 
 		# JSON coin
 		api_coin = "https://api.coinmarketcap.com/v1/ticker/" + coin + "/?convert=EUR"
@@ -80,9 +79,11 @@ if question_btc_coin == "yes" :
 		coin_btc  = float(coin_json[0]["price_btc"])
 
 		# POURCENTAGE
+		btc_percent = str(btc_json[0]["percent_change_24h"])
 		coin_percent = str(coin_json[0]["percent_change_24h"])
 		# EXPLODE DE LA CHAINE POUR RECUPERER "-"
-		split = coin_percent.split('.')
+		split_coins = coin_percent.split('.')
+		split_btc = btc_percent.split('.')
 		
 		
 		# SOMME DE COINS EN BITCOIN
@@ -96,13 +97,26 @@ if question_btc_coin == "yes" :
 		#------------------COURS BTC---------------------#
 
 		from terminaltables import AsciiTable
-		table_data = [
-			['1 BTC --> Euro'],
-			[Color('{autored}'+ str(cours_btc) + '{/autored}')]
-		]
-		table = AsciiTable(table_data)
-		print table.table
-
+		
+		if split_btc[0][0] == "-" :
+		
+			table_data = [
+				['1 BTC --> Euro','BTC %'],
+				[Color('{autored}'+ str(cours_btc) + '{/autored}'),
+				 Color('{autored}'+ str(btc_percent) + '{/autored}')]
+			]
+			table = AsciiTable(table_data)
+			print table.table
+			
+		else :
+		
+			table_data = [
+				['1 BTC --> Euro','BTC %'],
+				[Color('{autored}'+ str(cours_btc) + '{/autored}'),
+				 Color('{autogreen}'+ str(btc_percent) + '{/autogreen}')]
+			]
+			table = AsciiTable(table_data)
+			print table.table
 		#------------------POTENTIEL---------------------#
 		
 		from terminaltables import AsciiTable
@@ -117,7 +131,7 @@ if question_btc_coin == "yes" :
 		#-----------------SOMME TOTAL--------------------#
 		
 		# SI "-" EXISTE, POURENTAGE AFFICHE EN ROUGE
-		if split[0][0] == "-" :
+		if split_coins[0][0] == "-" :
 			from terminaltables import AsciiTable
 			table_data = [
 				['TOTAL ' + coin +'','TOTAL BTC', 'TOTAL euros', coin +' %'],
@@ -158,9 +172,8 @@ if question_btc_coin == "yes" :
 		os.system('cls' if os.name == 'nt' else 'clear')
 		
 else :
-
-	x = 1
-	while x >= 0 :
+	
+	while True :
 
 		# JSON coin
 		api_coin = "https://api.coinmarketcap.com/v1/ticker/" + coin + "/?convert=EUR"
@@ -181,9 +194,11 @@ else :
 		coin_btc  = float(coin_json[0]["price_btc"])
 
 		# POURCENTAGE
+		btc_percent = str(btc_json[0]["percent_change_24h"])
 		coin_percent = str(coin_json[0]["percent_change_24h"])
 		# EXPLODE DE LA CHAINE POUR RECUPERER "-"
-		split = coin_percent.split('.')
+		split_coins = coin_percent.split('.')
+		split_btc = btc_percent.split('.')
 		
 		
 		# SOMME DE COINS EN BITCOIN
@@ -197,19 +212,34 @@ else :
 		#------------------COURS BTC---------------------#
 
 		from terminaltables import AsciiTable
-		table_data = [
-			['1 BTC --> Euro'],
-			[Color('{autored}'+ str(cours_btc) + '{/autored}')]
-		]
-		table = AsciiTable(table_data)
-		print table.table
-
+		
+		if split_btc[0][0] == "-" :
+		
+			table_data = [
+				['1 BTC --> Euro','BTC %'],
+				[Color('{autored}'+ str(cours_btc) + '{/autored}'),
+				 Color('{autored}'+ str(btc_percent) + '{/autored}')]
+			]
+			table = AsciiTable(table_data)
+			print table.table
+			
+		else :
+		
+			table_data = [
+				['1 BTC --> Euro','BTC %'],
+				[Color('{autored}'+ str(cours_btc) + '{/autored}'),
+				 Color('{autogreen}'+ str(btc_percent) + '{/autogreen}')]
+			]
+			table = AsciiTable(table_data)
+			print table.table
 
 		#-----------------SOMME TOTAL--------------------#
 		
 		# SI "-" EXISTE, POURENTAGE AFFICHE EN ROUGE
-		if split[0][0] == "-" :
-			from terminaltables import AsciiTable
+		from terminaltables import AsciiTable
+		
+		if split_coins[0][0] == "-" :
+		
 			table_data = [
 				['TOTAL ' + coin +'','TOTAL BTC', 'TOTAL euros', coin +' %'],
 				[Color('{autored}' + str(nb_coins) + '{/autored}'),
@@ -219,7 +249,9 @@ else :
 			]
 			table = AsciiTable(table_data)
 			print table.table
+			
 		else : 
+		
 			from terminaltables import AsciiTable
 			table_data = [
 				['TOTAL ' + coin +'','TOTAL BTC', 'TOTAL euros', coin +' %'],
