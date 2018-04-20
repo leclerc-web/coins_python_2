@@ -97,7 +97,7 @@ if question_btc_coin == "yes" :
 		#------------------COURS BTC---------------------#
 
 		from terminaltables import AsciiTable
-		
+		# SI "-" EXISTE, POURENTAGE AFFICHE EN ROUGE
 		if split_btc[0][0] == "-" :
 		
 			table_data = [
@@ -240,9 +240,8 @@ else :
 
 		#-----------------SOMME TOTAL--------------------#
 		
-		# SI "-" EXISTE, POURENTAGE AFFICHE EN ROUGE
 		from terminaltables import AsciiTable
-		
+
 		if split_coins[0][0] == "-" :
 		
 			table_data = [
