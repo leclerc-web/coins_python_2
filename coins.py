@@ -35,8 +35,6 @@ print "\n\n\n\n"
 # INPUT STRING
 coin = raw_input("Name coin is : ")
 nb_coins_string =  raw_input("How many coins : ")
-# CONVERSION STRING  INPUT EN FLOAT
-nb_coins = float(nb_coins_string)
 
 # SI VIDE
 if not nb_coins_string :
@@ -47,6 +45,8 @@ if not nb_coins_string :
 	print Color("{autored}Put your coins amount or put 0{/autored}")
 	print "\n\n"
 
+# CONVERSION STRING  INPUT EN FLOAT
+nb_coins = float(nb_coins_string)
 ####################################################################################
 	
 		
@@ -56,11 +56,23 @@ if coin != "bitcoin" :
 	question_btc_coin = raw_input("Do you still have bitcoins? (yes or no) : ")
 	
 	if question_btc_coin == "yes" :
-		
+	
+		##########################################################################################################
 		# SI IL RESTE DES BITCOINS, COMBIEN EN A T ON ?
 		question_btc_coin = raw_input("How many bitcoins do you have left ? : ")
-		potentiel_buy = float(question_btc_coin)
+		
+		# SI VIDE
+		if not question_btc_coin :
 
+			os.system('cls' if os.name == 'nt' else 'clear')
+
+			print "\n\n"
+			print Color("{autored}Put your coins amount or put 0{/autored}")
+			print "\n\n"
+			
+		potentiel_buy = float(question_btc_coin)
+		##########################################################################################################
+		
 		while True :
 
 			# JSON coin
