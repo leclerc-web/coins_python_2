@@ -50,7 +50,44 @@ if not nb_coins_string :
 nb_coins = float(nb_coins_string)
 ####################################################################################
 	
-		
+
+# JSON coin
+api_coin = "https://api.coinmarketcap.com/v1/ticker/" + coin + "/?convert=EUR"
+coin_json = json.load(urllib2.urlopen(api_coin))
+
+# JSON BTC
+api_btc  = "https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=EUR";
+btc_json = json.load(urllib2.urlopen(api_btc))
+
+# COURS D'UN BITCOIN EN EURO
+cours_btc = float(btc_json[0]["price_eur"])
+
+# COURS MONNAIE : EURO, USD, BTC
+coin_euro = round(float(coin_json[0]["price_eur"]),2)
+coin_usd  = round(float(coin_json[0]["price_usd"]),2)
+coin_btc  = float(coin_json[0]["price_btc"])
+
+# POURCENTAGE 24H
+btc_percent = str(btc_json[0]["percent_change_24h"])
+coin_percent = str(coin_json[0]["percent_change_24h"])
+# EXPLODE DE LA CHAINE POUR RECUPERER "-"
+split_coins = coin_percent.split('.')
+split_btc = btc_percent.split('.')			
+
+# SOMME DE COINS EN BITCOIN
+total_coin_btc = float(nb_coins * coin_btc)
+# PRODUIT EN X, TOTAL DE COIN EN BTC * PRIX DU BTC EN EURO / 1
+total_coin_eur = round(float(total_coin_btc * cours_btc),2)
+
+array = [api_coin,coin_json,api_btc,btc_json,cours_btc,coin_euro,coin_usd,coin_btc,btc_percent,coin_percent,split_coins,split_btc,total_coin_btc,total_coin_eur]
+
+def coins() :
+	x = 0
+	while x <= 13 :
+		array[x]
+		x = x + 1
+	
+
 		
 if coin != "bitcoin" :
 
@@ -76,36 +113,7 @@ if coin != "bitcoin" :
 		
 		while True :
 
-			# JSON coin
-			api_coin = "https://api.coinmarketcap.com/v1/ticker/" + coin + "/?convert=EUR"
-			coin_json = json.load(urllib2.urlopen(api_coin))
-
-			# JSON BTC
-			api_btc  = "https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=EUR";
-			btc_json = json.load(urllib2.urlopen(api_btc))
-			
-
-			# COURS DU BITCOIN EN EURO
-			cours_btc = float(btc_json[0]["price_eur"])
-
-			# COURS DE LA MONNAIE EN EURO, USD, BTC
-			coin_euro = round(float(coin_json[0]["price_eur"]),2)
-			coin_usd  = round(float(coin_json[0]["price_usd"]),2)
-			coin_btc  = float(coin_json[0]["price_btc"])
-
-			# POURCENTAGE 24H
-			btc_percent = str(btc_json[0]["percent_change_24h"])
-			coin_percent = str(coin_json[0]["percent_change_24h"])
-			# EXPLODE DE LA CHAINE POUR RECUPERER "-"
-			split_coins = coin_percent.split('.')
-			split_btc = btc_percent.split('.')
-					
-			# SOMME DE COINS EN BITCOIN
-			total_coin_btc = float(nb_coins * coin_btc)
-			# PRODUIT EN X, TOTAL DE COIN EN BTC * PRIX DU BTC EN EURO / 1
-			total_coin_eur = round(float(total_coin_btc * cours_btc),2)
-
-
+			coins()
 
 			#------------------COURS BTC---------------------#
 						
@@ -184,38 +192,9 @@ if coin != "bitcoin" :
 	else  :
 		
 		while True :
-
-			# JSON coin
-			api_coin = "https://api.coinmarketcap.com/v1/ticker/" + coin + "/?convert=EUR"
-			coin_json = json.load(urllib2.urlopen(api_coin))
-
-			# JSON BTC
-			api_btc  = "https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=EUR";
-			btc_json = json.load(urllib2.urlopen(api_btc))
-			
-			# COURS D'UN BITCOIN EN EURO
-			cours_btc = float(btc_json[0]["price_eur"])
-
-			# COURS MONNAIE : EURO, USD, BTC
-			coin_euro = round(float(coin_json[0]["price_eur"]),2)
-			coin_usd  = round(float(coin_json[0]["price_usd"]),2)
-			coin_btc  = float(coin_json[0]["price_btc"])
-
-			# POURCENTAGE 24H
-			btc_percent = str(btc_json[0]["percent_change_24h"])
-			coin_percent = str(coin_json[0]["percent_change_24h"])
-			# EXPLODE DE LA CHAINE POUR RECUPERER "-"
-			split_coins = coin_percent.split('.')
-			split_btc = btc_percent.split('.')			
-			
-			# SOMME DE COINS EN BITCOIN
-			total_coin_btc = float(nb_coins * coin_btc)
-			# PRODUIT EN X, TOTAL DE COIN EN BTC * PRIX DU BTC EN EURO / 1
-			total_coin_eur = round(float(total_coin_btc * cours_btc),2)
-
-
-			
-			
+		
+			coins()
+		
 			#------------------COURS BTC---------------------#
 				
 			if split_btc[0][0] == "-" :
@@ -288,34 +267,7 @@ elif coin == "bitcoin" :
 
 	while True :
 
-		# JSON coin
-		api_coin = "https://api.coinmarketcap.com/v1/ticker/" + coin + "/?convert=EUR"
-		coin_json = json.load(urllib2.urlopen(api_coin))
-
-		# JSON BTC
-		api_btc  = "https://api.coinmarketcap.com/v1/ticker/bitcoin/?convert=EUR";
-		btc_json = json.load(urllib2.urlopen(api_btc))
-		
-		# COURS BITCOIN EN EURO
-		cours_btc = float(btc_json[0]["price_eur"])
-
-		# COURS MONNAIE : EURO, USD, BTC
-		coin_euro = round(float(coin_json[0]["price_eur"]),2)
-		coin_usd  = round(float(coin_json[0]["price_usd"]),2)
-		coin_btc  = float(coin_json[0]["price_btc"])
-
-		# POURCENTAGE 24H
-		coin_percent = str(coin_json[0]["percent_change_24h"])
-		# EXPLODE DE LA CHAINE POUR RECUPERER "-"
-		split_coins = coin_percent.split('.')
-			
-		# SOMME DE COINS EN BITCOIN
-		total_coin_btc = float(nb_coins * coin_btc)
-		# PRODUIT EN X, TOTAL DE COIN EN BTC * PRIX DU BTC EN EURO / 1
-		total_coin_eur = round(float(total_coin_btc * cours_btc),2)
-
-
-
+		coins()
 
 		#------------------COURS BTC---------------------#
 		 	 
