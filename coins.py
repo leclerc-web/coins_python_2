@@ -48,9 +48,9 @@ if not nb_coins_string :
 
 # CONVERSION STRING -> FLOAT
 nb_coins = float(nb_coins_string)
+
 ####################################################################################
 	
-
 # JSON coin
 api_coin = "https://api.coinmarketcap.com/v1/ticker/" + coin + "/?convert=EUR"
 coin_json = json.load(urllib2.urlopen(api_coin))
@@ -87,7 +87,6 @@ def coins() :
 		array[x]
 		x = x + 1
 	
-
 		
 if coin != "bitcoin" :
 
