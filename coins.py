@@ -1,9 +1,9 @@
 # -*-coding:Latin-1 -*
 
-# INSTALL pip install terminaltables
-# INSTALL pip install simplejson
-# INSTALL pip install colorclass
-# INSTALL WINDOWS python -m ...
+# INSTALL pip install terminaltables import AsciiTable
+# INSTALL pip install json
+# INSTALL pip install colorclass import Color
+# INSTALL WINDOWS python -m pip install ...
 
 
 # SLEEP
@@ -50,9 +50,76 @@ if not nb_coins_string :
 nb_coins = float(nb_coins_string)
 
 ####################################################################################
+
+		
+		
+def cours_coins() :
+
+	table_data = [
+				['Cours '+ coin +' --> $', 'Cours ' + coin + ' --> EURO', 'Cours ' + coin +' --> SATOSHIS'],
+				[Color('{autored}' + str(coin_usd) + '{/autored}'), 
+				 Color('{autored}' + str(coin_euro) + '{/autored}'),
+				 Color('{autored}' + "{:.8f}".format(coin_btc) + '{/autored}')]
+			]
+	table = AsciiTable(table_data)
+	print table.table
+
+	# ACTUALISATION API 
+	time.sleep(5)
+	# CMD CLEAR
+	os.system('cls' if os.name == 'nt' else 'clear')
+		
 	
 
+def total_coins():
 
+	if split_coins[0][0] == "-" :
+			
+		table_data = [
+			['TOTAL ' + coin +'','TOTAL BTC', 'TOTAL euros', coin +' %'],
+			[Color('{autored}' + str(nb_coins) + '{/autored}'),
+			 Color('{autored}' + "{:.8f}".format(total_coin_btc) + '{/autored}'),
+			 Color('{autored}' + str(total_coin_eur) + '{/autored}'),
+			 Color('{autored}' + str(coin_percent) + '{/autored}')]				   
+		]
+		table = AsciiTable(table_data)
+		print table.table
+
+	else : 
+
+		table_data = [
+			['TOTAL ' + coin +'','TOTAL BTC', 'TOTAL euros', coin +' %'],
+			[Color('{autored}' + str(nb_coins) + '{/autored}'),
+			 Color('{autored}' + "{:.8f}".format(total_coin_btc) + '{/autored}'),
+			 Color('{autored}' + str(total_coin_eur) + '{/autored}'),
+			 Color('{autogreen}' + str(coin_percent) + '{/autogreen}')]				   
+		]
+		table = AsciiTable(table_data)
+		print table.table
+
+
+	
+def cours_btc_positif():
+		
+		table_data = [
+			['1 BTC --> Euro','BTC %'],
+			[Color('{autored}'+ str(cours_btc) + '{/autored}'),
+			 Color('{autored}'+ str(btc_percent) + '{/autored}')]
+		]
+		table = AsciiTable(table_data)
+		print table.table
+		
+def cours_btc_negatif():
+
+	table_data = [
+		['1 BTC --> Euro','BTC %'],
+		[Color('{autored}'+ str(cours_btc) + '{/autored}'),
+		 Color('{autogreen}'+ str(btc_percent) + '{/autogreen}')]
+	]
+	table = AsciiTable(table_data)
+	print table.table
+
+		
 # array = [cours_btc,coin_euro,coin_usd,coin_btc,btc_percent,coin_percent,split_coins,split_btc,total_coin_btc,total_coin_eur]
 
 # def coins() :
@@ -61,7 +128,13 @@ nb_coins = float(nb_coins_string)
 		# array[x]
 		# x = x + 1
 		
-if coin != "bitcoin" :
+		
+		
+		
+		
+
+	
+if coin != "bitcoin" :	
 
 	question_btc_coin = raw_input("Do you still have bitcoins? (yes or no) : ")
 	
@@ -115,26 +188,10 @@ if coin != "bitcoin" :
 			
 			#------------------COURS BTC---------------------#
 						
-			if split_btc[0][0] == "-" :
-			
-				table_data = [
-					['1 BTC --> Euro','BTC %'],
-					[Color('{autored}'+ str(cours_btc) + '{/autored}'),
-					 Color('{autored}'+ str(btc_percent) + '{/autored}')]
-				]
-				table = AsciiTable(table_data)
-				print table.table
-				
-			else :
-			
-				table_data = [
-					['1 BTC --> Euro','BTC %'],
-					[Color('{autored}'+ str(cours_btc) + '{/autored}'),
-					 Color('{autogreen}'+ str(btc_percent) + '{/autogreen}')]
-				]
-				table = AsciiTable(table_data)
-				print table.table
-				
+			if split_btc[0][0] == "-" :			
+				cours_btc_positif()			
+			else:		
+				cours_btc_negatif()			
 			#------------------POTENTIEL---------------------#		
 			 
 			table_data = [
@@ -145,47 +202,10 @@ if coin != "bitcoin" :
 			table = AsciiTable(table_data)
 			print table.table
 			
-			#-----------------SOMME TOTAL--------------------#			 
-			
-			if split_coins[0][0] == "-" :
-		
-				table_data = [
-					['TOTAL ' + coin +'','TOTAL BTC', 'TOTAL euros', coin +' %'],
-					[Color('{autored}' + str(nb_coins) + '{/autored}'),
-					 Color('{autored}' + "{:.8f}".format(total_coin_btc) + '{/autored}'),
-					 Color('{autored}' + str(total_coin_eur) + '{/autored}'),
-					 Color('{autored}' + str(coin_percent) + '{/autored}')]				   
-				]
-				table = AsciiTable(table_data)
-				print table.table
-			
-			else : 
-		
-				table_data = [
-					['TOTAL ' + coin +'','TOTAL BTC', 'TOTAL euros', coin +' %'],
-					[Color('{autored}' + str(nb_coins) + '{/autored}'),
-					 Color('{autored}' + "{:.8f}".format(total_coin_btc) + '{/autored}'),
-					 Color('{autored}' + str(total_coin_eur) + '{/autored}'),
-					 Color('{autogreen}' + str(coin_percent) + '{/autogreen}')]				   
-				]
-				table = AsciiTable(table_data)
-				print table.table
-
-			#------------------COURS COINS---------------------#
-			 
-			table_data = [
-				['Cours '+ coin +' --> $', 'Cours ' + coin + ' --> EURO', 'Cours ' + coin +' --> SATOSHIS'],
-				[Color('{autored}' + str(coin_usd) + '{/autored}'), 
-				 Color('{autored}' + str(coin_euro) + '{/autored}'),
-				 Color('{autored}' + "{:.8f}".format(coin_btc) + '{/autored}')]
-			]
-			table = AsciiTable(table_data)
-			print table.table
-
-			# ACTUALISATION API 
-			time.sleep(5)
-			# CMD CLEAR
-			os.system('cls' if os.name == 'nt' else 'clear')
+			#-----------------SOMME TOTAL--------------------#			 			
+			total_coins()
+			#------------------COURS COINS---------------------#			 
+			cours_coins()
 			
 	else  :
 		
@@ -221,68 +241,14 @@ if coin != "bitcoin" :
 			
 			
 			#------------------COURS BTC---------------------#
-				
-			if split_btc[0][0] == "-" :
-			
-				table_data = [
-					['1 BTC --> Euro','BTC %'],
-					[Color('{autored}'+ str(cours_btc) + '{/autored}'),
-					 Color('{autored}'+ str(btc_percent) + '{/autored}')]
-				]
-				table = AsciiTable(table_data)
-				print table.table
-				
-			else :
-			
-				table_data = [
-					['1 BTC --> Euro','BTC %'],
-					[Color('{autored}'+ str(cours_btc) + '{/autored}'),
-					 Color('{autogreen}'+ str(btc_percent) + '{/autogreen}')]
-				]
-				table = AsciiTable(table_data)
-				print table.table
-
-			#-----------------SOMME TOTAL--------------------#		 
-			
-			if split_coins[0][0] == "-" :
-			
-				table_data = [
-					['TOTAL ' + coin +'','TOTAL BTC', 'TOTAL euros', coin +' %'],
-					[Color('{autored}' + str(nb_coins) + '{/autored}'),
-					 Color('{autored}' + "{:.8f}".format(total_coin_btc) + '{/autored}'),
-					 Color('{autored}' + str(total_coin_eur) + '{/autored}'),
-					 Color('{autored}' + str(coin_percent) + '{/autored}')]				   
-				]
-				table = AsciiTable(table_data)
-				print table.table
-				
-			else : 
-							 
-				table_data = [
-					['TOTAL ' + coin +'','TOTAL BTC', 'TOTAL euros', coin +' %'],
-					[Color('{autored}' + str(nb_coins) + '{/autored}'),
-					 Color('{autored}' + "{:.8f}".format(total_coin_btc) + '{/autored}'),
-					 Color('{autored}' + str(total_coin_eur) + '{/autored}'),
-					 Color('{autogreen}' + str(coin_percent) + '{/autogreen}')]				   
-				]
-				table = AsciiTable(table_data)
-				print table.table
-
-			#------------------COURS COINS---------------------#
-			 
-			table_data = [
-				['Cours '+ coin +' --> $', 'Cours ' + coin + ' --> EURO', 'Cours ' + coin +' --> SATOSHIS'],
-				[Color('{autored}' + str(coin_usd) + '{/autored}'), 
-				 Color('{autored}' + str(coin_euro) + '{/autored}'),
-				 Color('{autored}' + "{:.8f}".format(coin_btc) + '{/autored}')]
-			]
-			table = AsciiTable(table_data)
-			print table.table
-
-			# ACTUALISATION API 
-			time.sleep(5)
-			# CMD CLEAR
-			os.system('cls' if os.name == 'nt' else 'clear')
+			if split_btc[0][0] == "-" :	
+				cours_btc_positif()		
+			else:	
+				cours_btc_negatif()
+			#-----------------SOMME TOTAL--------------------#		 	
+			total_coins()
+			#------------------COURS COINS---------------------# 
+			cours_coins()
 			
 
 ###################################################################"
@@ -330,46 +296,7 @@ elif coin == "bitcoin" :
 		table = AsciiTable(table_data)
 		print table.table
 	
-		#-----------------SOMME TOTAL--------------------#
-			
-		if split_coins[0][0] == "-" :
-		
-			table_data = [
-				['TOTAL ' + coin +'','TOTAL BTC', 'TOTAL euros', coin +' %'],
-				[Color('{autored}' + str(nb_coins) + '{/autored}'),
-				 Color('{autored}' + "{:.8f}".format(total_coin_btc) + '{/autored}'),
-				 Color('{autored}' + str(total_coin_eur) + '{/autored}'),
-				 Color('{autored}' + str(coin_percent) + '{/autored}')]				   
-			]
-			table = AsciiTable(table_data)
-			print table.table
-			
-		else : 
-				 
-			table_data = [
-				['TOTAL ' + coin +'','TOTAL BTC', 'TOTAL euros', coin +' %'],
-				[Color('{autored}' + str(nb_coins) + '{/autored}'),
-				 Color('{autored}' + "{:.8f}".format(total_coin_btc) + '{/autored}'),
-				 Color('{autored}' + str(total_coin_eur) + '{/autored}'),
-				 Color('{autogreen}' + str(coin_percent) + '{/autogreen}')]				   
-			]
-			table = AsciiTable(table_data)
-			print table.table
-
-		#------------------COURS COINS---------------------#
-	 
-		table_data = [
-			['Cours '+ coin +' --> $', 'Cours ' + coin + ' --> EURO', 'Cours ' + coin +' --> SATOSHIS'],
-			[Color('{autored}' + str(coin_usd) + '{/autored}'), 
-			 Color('{autored}' + str(coin_euro) + '{/autored}'),
-			 Color('{autored}' + "{:.8f}".format(coin_btc) + '{/autored}')]
-		]
-		table = AsciiTable(table_data)
-		print table.table
-
-		# ACTUALISATION API 
-		time.sleep(5)
-		# CMD CLEAR
-		os.system('cls' if os.name == 'nt' else 'clear')
-		
-		
+		#-----------------SOMME TOTAL--------------------#		
+		total_coins()
+		#------------------COURS COINS---------------------# 
+		cours_coins()	
